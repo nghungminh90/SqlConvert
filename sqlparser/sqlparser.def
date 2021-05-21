@@ -1,0 +1,9 @@
+LIBRARY
+EXPORTS
+	CreateParserObject
+	DeleteParserObject
+	SetParserTypes
+	SetParserOption
+	ConvertSql
+	FreeOutput
+    CreateAssessmentReport
