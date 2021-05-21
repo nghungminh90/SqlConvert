@@ -11749,6 +11749,15 @@ bool SqlParser::ParseFunctionToChar(Token *name, Token *open)
 		// Define a style for SQL Server
 		if(_target == SQL_SQL_SERVER)
 		{
+			
+			// YYYY/MM/DD HH24:MI:SS
+			if(format->Compare("'YYYY/MM/DD HH24:MI:SS'", L"'YYYY/MM/DD HH24:MI:SS'", 23) == true)
+			{
+				Token::Change(name, "CONVERT(VARCHAR(20), ", L"CONVERT(VARCHAR(20), ", 21);
+				Token::Remove(open);
+				Token::Change(format, "120", L"120", 3);
+			}
+			else
 			// YYYY-MM-DD
 			if(format->Compare("'YYYY-MM-DD'", L"'YYYY-MM-DD'", 12) == true)
 			{
@@ -11780,6 +11789,7 @@ bool SqlParser::ParseFunctionToChar(Token *name, Token *open)
 				Token::Remove(open);
 				Token::Change(format, "108", L"108", 3);
 			}
+			
 		}
 		else
 		// Process each format specifier
